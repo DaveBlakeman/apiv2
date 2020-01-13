@@ -25,10 +25,10 @@ router.get('/', function(req, res, next) {
 	else
 	    sql = 'SELECT * FROM User WHERE (1=1) '
 	
-	var officeid = parseInt(req.query.officeid);
+	/*var officeid = parseInt(req.query.officeid);
 	if (!isNaN(officeid)) {
 		sql = sql + ' AND UserOfficeId = ' + req.query.officeid
-	}
+	}*/
 	
 	HandleSqlRequest(sql, req, res, next)
 });
