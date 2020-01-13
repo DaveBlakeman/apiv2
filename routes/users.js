@@ -43,4 +43,9 @@ router.get('/:userid', function(req, res, next) {
 		res.send(JSON.stringify({"status": 200, "error": "invalid user id", "response": ""}));
 });
 
+// POST method route
+router.post('/', function (req, res) {
+  res.send('Add user')
+})
+
 module.exports = router;
