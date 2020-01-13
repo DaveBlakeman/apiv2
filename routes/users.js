@@ -43,9 +43,19 @@ router.get('/:userid', function(req, res, next) {
 		res.send(JSON.stringify({"status": 200, "error": "invalid user id", "response": ""}));
 });
 
-// POST method route
+// Add a new user by POSTing to /users
 router.post('/', function (req, res) {
-  res.send('Add user')
+  HandleSqlRequest('INSERT User (UserName) VALUES ("Fred"), req, res, next)
+})
+
+// Update a user by POSTing to that Specific userId
+router.post('/:userid', function (req, res) 
+	var userid = parseInt(req.params.userid);
+	
+	if (!isNaN(userid))
+		HandleSqlRequest('UPDATE User SET UserName = "Fred" WHERE UserId = ' + req.params.userid, req, res, next)
+	else
+		res.send(JSON.stringify({"status": 200, "error": "invalid user id", "response": ""}));
 })
 
 module.exports = router;
