@@ -45,7 +45,7 @@ router.get('/:userid', function(req, res, next) {
 
 // Add a new user by POSTing to /users
 router.post('/', function (req, res) {
-  HandleSqlRequest('INSERT User (UserName) VALUES ("Fred"), req, res, next)
+  HandleSqlRequest('INSERT User ("UserName") VALUES ("Fred")', req, res, next)
 })
 
 // Update a user by POSTing to that Specific userId
