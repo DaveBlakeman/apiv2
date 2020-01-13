@@ -26,10 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Database connection
 app.use(function(req, res, next) {
 	res.locals.connection = mysql.createConnection({
-		host     : 'remotemysql.com',
-		user     : 'MEmh29aO0i',
-		password : 'f1mwkF0cfp',
-		database : 'MEmh29aO0i'
+		host     : '18.202.243.235',
+		user     : 'root',
+		password : 'C0derD0j0!',
+		database : 'KillerIsland'
 	});
 	res.locals.connection.connect(function (err) {
 	  if (err) {
