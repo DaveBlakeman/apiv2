@@ -43,11 +43,13 @@ router.get('/:userid', function(req, res, next) {
 		res.send(JSON.stringify({"status": 200, "error": "invalid user id", "response": ""}));
 });
 
-/* 
+
 // Add a new user by POSTing to /users
 router.post('/', function (req, res) {
   HandleSqlRequest('INSERT User ("UserName") VALUES ("Fred")', req, res, next)
 })
+
+/*
 
 // Update a user by POSTing to that Specific userId
 router.post('/:userid', function (req, res) 
