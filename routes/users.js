@@ -14,6 +14,19 @@ function HandleSqlRequest(sql, req, res, next) {
 	});
 }
 
+function HandleSqlUpdate(sql, req, res) {
+	console.log('Sql = ' + sql)
+	res.locals.connection.query(sql, function (error, result) {
+	  	if (error){
+	  		res.send(JSON.stringify({"status": 500, "error": error, "response": null})); 
+	  		//If there is error, we send the error in the error section with 500 status
+	  	} else {
+  			res.send(JSON.stringify({"status": 200, "error": null, "response": result}));
+  			//If there is no error, all is good and response is 200OK.
+	  	}
+	});
+}
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
 	var connection = res.locals.connection
@@ -46,7 +59,7 @@ router.get('/:userid', function(req, res, next) {
 
 // Add a new user by POSTing to /users
 router.post('/', function (req, res) {
-  HandleSqlRequest('INSERT INTO User (UserName) VALUES ("Fred")', req, res, next)
+  HandleSqlUpdate('INSERT INTO User (UserName) VALUES ("Fred")', req, res)
 })
 
 /*
