@@ -59,7 +59,11 @@ router.get('/:userid', function(req, res, next) {
 
 // Add a new user by POSTing to /users
 router.post('/', function (req, res) {
-  HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES ("Fred", 0, "Dinosaur")', req, res)
+  //var userName = req.UserName;
+  //var userScore = req.UserScore;
+  //var userCostume = req.UserCostome;
+  res.send(JSON.stringify({"status": 200, "error": null, "request": req}));
+  //HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES ("Fred", 0, "Dinosaur")', req, res)
 })
 
 /*
