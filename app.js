@@ -28,7 +28,7 @@ app.use(function(req, res, next) {
 	res.locals.connection = mysql.createConnection({
 		host     : 'remotemysql.com',
 		user     : 'MEmh29aO0i',
-		password : 'f1mwkF0cfp',
+		password : 'nJgXhfwt4J',
 		database : 'MEmh29aO0i'
 	});
 	res.locals.connection.connect(function (err) {
