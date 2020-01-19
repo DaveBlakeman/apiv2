@@ -14,9 +14,9 @@ function HandleSqlRequest(sql, req, res, next) {
 	});
 }
 
-function HandleSqlUpdate(sql, req, res) {
+function HandleSqlUpdate(sql, args, req, res) {
 	console.log('Sql = ' + sql)
-	res.locals.connection.query(sql, function (error, result) {
+	res.locals.connection.query(sql, args, function (error, result) {
 	  	if (error){
 	  		res.send(JSON.stringify({"status": 500, "error": error, "response": null})); 
 	  		//If there is error, we send the error in the error section with 500 status
@@ -60,10 +60,9 @@ router.get('/:userid', function(req, res, next) {
 // Add a new user by POSTing to /users
 router.post('/', function (req, res) {
   var userName = req.body.UserName;
-  //var userScore = req.UserScore;
-  //var userCostume = req.UserCostome;
-  res.send(JSON.stringify({"status": 200, "error": null, "userName": "UserName=" + userName}));
-  //HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES ("Fred", 0, "Dinosaur")', req, res)
+  var userScore = req.body.UserScore;
+  var userCostume = req.body.UserCostome;
+  HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES (?, ?, ?)', [userName, userScore, userCostume], req, res)
 })
 
 /*
