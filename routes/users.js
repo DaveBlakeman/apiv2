@@ -37,12 +37,7 @@ router.get('/', function(req, res, next) {
 	    sql = 'SELECT * FROM User WHERE UserName = ' + username 
 	else
 	    sql = 'SELECT * FROM User WHERE (1=1) '
-	
-	/*var officeid = parseInt(req.query.officeid);
-	if (!isNaN(officeid)) {
-		sql = sql + ' AND UserOfficeId = ' + req.query.officeid
-	}*/
-	
+		
 	HandleSqlRequest(sql, req, res, next)
 });
 
@@ -53,7 +48,7 @@ router.get('/:userid', function(req, res, next) {
 	if (!isNaN(userid))
 		HandleSqlRequest('SELECT * FROM User WHERE UserId = ' + req.params.userid, req, res, next)
 	else
-		res.send(JSON.stringify({"status": 200, "error": "invalid user id", "response": ""}));
+		res.send(JSON.stringify({"status": 404, "error": "invalid user id", "response": ""}));
 });
 
 
@@ -65,17 +60,19 @@ router.post('/', function (req, res) {
   HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES (?, ?, ?)', [userName, userScore, userCostume], req, res)
 })
 
-/*
 
 // Update a user by POSTing to that Specific userId
-router.post('/:userid', function (req, res) 
+router.post('/:userid', function (req, res) {
 	var userid = parseInt(req.params.userid);
 	
-	if (!isNaN(userid))
-		HandleSqlRequest('UPDATE User SET UserName = "Fred" WHERE UserId = ' + req.params.userid, req, res, next)
+	if (!isNaN(userid)) {
+	  var userName = req.body.UserName;
+	  var userScore = req.body.UserScore;
+	  var userCostume = req.body.UserCostume;
+	  HandleSqlUpdate('UPDATE User SET UserName = ?, UserScore = ?, UserCostume = ? WHERE UserId = ?', [userName, userScore, userCostume, userid], req, res)
+	}
 	else
-		res.send(JSON.stringify({"status": 200, "error": "invalid user id", "response": ""}));
+		res.send(JSON.stringify({"status": 404, "error": "invalid user id", "response": ""}));
 })
-*/
 
 module.exports = router;
