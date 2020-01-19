@@ -59,7 +59,7 @@ router.get('/:userid', function(req, res, next) {
 
 // Add a new user by POSTing to /users
 router.post('/', function (req, res) {
-  var userName = JSON.stringify(req.body);
+  var userName = req.body.UserName;
   //var userScore = req.UserScore;
   //var userCostume = req.UserCostome;
   res.send(JSON.stringify({"status": 200, "error": null, "userName": "UserName=" + userName}));
