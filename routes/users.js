@@ -61,7 +61,7 @@ router.get('/:userid', function(req, res, next) {
 router.post('/', function (req, res) {
   var userName = req.body.UserName;
   var userScore = req.body.UserScore;
-  var userCostume = req.body.UserCostome;
+  var userCostume = req.body.UserCostume;
   HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES (?, ?, ?)', [userName, userScore, userCostume], req, res)
 })
 
