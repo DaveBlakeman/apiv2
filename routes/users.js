@@ -60,7 +60,6 @@ router.post('/', function (req, res) {
   HandleSqlUpdate('INSERT INTO User (UserName, UserScore, UserCostume) VALUES (?, ?, ?)', [userName, userScore, userCostume], req, res)
 })
 
-
 // Update a user by POSTing to that Specific userId
 router.post('/:userid', function (req, res) {
 	var userId = parseInt(req.params.userid);
@@ -80,7 +79,7 @@ router.delete('/:userid', function (req, res) {
 	var userId = parseInt(req.params.userid);
 	
 	if (!isNaN(userId)) {
-	  HandleSqlUpdate('DELETE User WHERE UserId = ?', [userId], req, res)
+	  HandleSqlUpdate('DELETE FROM User WHERE UserId = ?', [userId], req, res)
 	}
 	else
 		res.send(JSON.stringify({"status": 404, "error": "invalid user id", "response": ""}));
