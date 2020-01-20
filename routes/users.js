@@ -27,7 +27,7 @@ function HandleSqlUpdate(sql, args, req, res) {
 	});
 }
 
-/* GET users listing. */
+/* GET all users. */
 router.get('/', function(req, res, next) {
 	var connection = res.locals.connection
 	var username = req.query.username ? connection.escape(req.query.username) : ''
@@ -53,7 +53,7 @@ router.get('/:userid', function(req, res, next) {
 
 
 // Add a new user by POSTing to /users
-router.post('/', function (req, res) {
+router.post('/', function (req, res) { 
   var userName = req.body.UserName;
   var userScore = req.body.UserScore;
   var userCostume = req.body.UserCostume;
@@ -65,21 +65,21 @@ router.post('/:userid', function (req, res) {
 	var userId = parseInt(req.params.userid);
 	
 	if (!isNaN(userId)) {
-	  var userName = req.body.UserName;
-	  var userScore = req.body.UserScore;
-	  var userCostume = req.body.UserCostume;
-	  HandleSqlUpdate('UPDATE User SET UserName = ?, UserScore = ?, UserCostume = ? WHERE UserId = ?', [userName, userScore, userCostume, userId], req, res)
+		var userName = req.body.UserName;
+		var userScore = req.body.UserScore;
+		var userCostume = req.body.UserCostume;
+		HandleSqlUpdate('UPDATE User SET UserName = ?, UserScore = ?, UserCostume = ? WHERE UserId = ?', [userName, userScore, userCostume, userId], req, res)
 	}
 	else
 		res.send(JSON.stringify({"status": 404, "error": "invalid user id", "response": ""}));
 })
 
-// Delete a user by DELETEing  that Specific userId
+// Delete a user by DELETEing that Specific userId
 router.delete('/:userid', function (req, res) {
 	var userId = parseInt(req.params.userid);
 	
 	if (!isNaN(userId)) {
-	  HandleSqlUpdate('DELETE FROM User WHERE UserId = ?', [userId], req, res)
+		HandleSqlUpdate('DELETE FROM User WHERE UserId = ?', [userId], req, res)
 	}
 	else
 		res.send(JSON.stringify({"status": 404, "error": "invalid user id", "response": ""}));
