@@ -26,7 +26,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Database connection
-app.use(function(req, res, next) {
+app.use(function(req, res, next) { 
 	res.locals.connection = mysql.createConnection({
 		host     : 'remotemysql.com', 
 		user     : 'MEmh29aO0i',
